@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { background-color: #222; }
+
+* {
+--pink: #a88db4;
+--pinklight: rgba(168,141,180,.6);
+--pinklightest: rgba(168,141,180,.12);
+--blue: #c28fb4;
+--bluedark: #753f67;
+--white: #e6e0db;
+--sidetext: #515150;
+--sidecircle: #acada8;
+--border: rgba(232,233,228, .4);
+--borderlight: rgba(255, 255, 255,.2);
+--borderlighter: rgba(255, 255, 255,.15);
+--borderlightest: rgba(255, 255, 255,.07);
+--borderdark: rgba(119, 116, 111, .1);
+--textdark: #aaa;
+--textdarker: #999;
+--dark: #050203;
+--darklight: #150c09;
+--lightbg:  rgba(253, 253, 250,.85);
+--lighterbg:  #E9E9E8;
+    scrollbar-width: thin;
+    scrollbar-color:  var(--pink) #e8e9e4;
+  --color: var(--pink);
+  --color: #a093ba!important;
+  --color2-wyld: #d6cb80;
+  --color2-weaver: #78b8d5;
+  --color2-wyrm: #d5545d;
+  --color2: #939aba;
+  --bg-color: rgba(18, 16, 24, .7)
+}
+
+#inv2-wrap {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 150px 80px auto;
+  width: 660px;
+  margin: 50px auto 30px;
+  background: var(--lightbg);
+  outline: 1px solid var(--borderlight);
+  outline-offset: 15px;
+  --bg-white: rgba(255,255,255,.3);
+}
+
+#inv2-header {
+  position: relative;
+  background-color: var(--color);
+}
+
+#inv2-header .name {
+  width: max-content;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: poppins;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -.5px;
+  line-height: 50px;
+}
+
+#inv2-nav {
+  position: sticky;
+  z-index: 2;
+  top: 0px;
+  display: flex;
+  background: linear-gradient(var(--bg-color) 0%, var(--bg-color) 100%), var(--dark);
+}
+
+#inv2-nav a {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--white);
+  font-family: poppins;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 11px;
+  letter-spacing: 1.2px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all .4s ease-out .2s;
+  overflow: hidden;
+}
+#inv2-nav a:nth-child(2n) { background-color: var(--borderlightest); }
+
+#inv2-nav a i {
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 7px;
+}
+
+#inv2-nav a:hover {
+  color: var(--dark);
+  background-color: var(--color2);
+  transition: all .3s ease-in;
+}
+#inv2-nav a:hover i { 
+  color: var(--dark); 
+  transition: all .3s ease-in;
+  animation: wiggle 1s infinite;
+}
+
+#inv2-body {
+  scroll-behavior: smooth;
+}
+/*********************************************************
+* THESE ARE COPIED FROM THE OTHER TEMPLATE, SO JUST ADD. *
+*********************************************************/
+#inv2-body section {
+  display: block;
+  padding: 10px 25px 35px 25px;
+  font-family: inter;
+  font-size: 11px;
+  line-height: 17px;
+  font-weight: 400;
+  color: rgba(0,0,0,.9);
+  text-align: justify;
+  letter-spacing: .5px;
+  counter-reset: section;  
+}
+#inv2-body section code {
+  font-family: roboto mono;
+  font-weight: 500;
+  letter-spacing: .5px;
+  background: linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)), var(--color);
+  padding: 1px 4px;
+  font-size: 11px;
+  line-height: 19px;
+  text-transform: uppercase;
+}
+#inv2-body section:nth-child(2n) { background: rgba(0,0,0,.05); }
+
+#inv2-body section h1 {
+  display: table;
+  padding: 3px;
+  margin: 15px 0 30px;
+  font-family: poppins;
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-size: 25px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: var(--dark);
+  background-image: linear-gradient(rgba(0,0,0,0) 60%, var(--color2) 60%, var(--color2) 100%);
+}
+
+#inv2-body section h2 {
+  font-family: space grotesk;
+  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--color);
+  margin: 0;
+  padding: 25px 25px 15px;
+}
+
+#inv2-body item { 
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-bottom: 20px;
+  background-color: var(--bg-white);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 3px 3px 5px rgba(0,0,0,.05);
+}
+
+#inv2-body item .description {
+  display: block;
+  padding: 0px 25px 25px;
+}
+
+#inv2-body .notes {
+  background: var(--color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 5px 25px 15px;
+}
+#inv2-body note {
+  display: block;
+  padding: 0px 3px 3px;
+  margin: 11px 15px 0 0;
+  font-weight: 400;
+  font-family: space grotesk;
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 0px;
+  color: rgba(0,0,0,.9);
+  border-bottom: 1px solid var(--border);
+  text-transform: lowercase;
+}
+#inv2-body note:last-child { margin-right: 0px; }
+
+/*********************************************************
+* END COPYING HERE                                       *
+*********************************************************/
+
+#inv2-body item .icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 70px;
+  height: 50px;
+  background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), var(--color);
+  border-radius: 0 0 0 5px;
+  opacity: 1;
+  font-family: poppins;
+  font-weight: 900;
+  font-size: 35px;
+  letter-spacing: 1px;
+  line-height: 50px;
+  text-align: center;
+  color: rgba(255,255,255,.85);
+}
+
+#inv2-body h2 { line-height: 19px; }
+#inv2-body h2 .grade {
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 0px;
+  background-color: var(--color);
+  color: var(--white);
+  border-radius: 4px;
+  position: relative;
+  top: -1px;
+  font-size: 80%;
+  padding: 1px 4px;
+}
+
+#inv2-body section item {
+  float: left;
+  width: 295px;
+  box-sizing: border-box;
+}
+#inv2-body section item:nth-child(2n) {
+  margin-right: 0;
+}
+
+#inv2-body .content { display: block; }
+#inv2-body section .treasure h2 {
+  text-align: left; 
+  width: 170px;
+}
+
+#inv2-body .crafting-mats, #inv2-body .treasure { 
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: -20px;
+}
+
+#inv2-body material {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 60px;
+  padding: 10px 15px 10px 10px;
+  border-radius: 4px;
+  background: var(--bg-white);
+  box-shadow: 3px 3px 5px rgba(0,0,0,.05);
+  overflow: hidden;
+  margin: 0 20px 20px 0;
+}
+
+#inv2-body material:nth-child(6n) {
+  margin-right: 0;
+}
+
+#inv2-body material .icon {
+  width: 45px;
+  height: 45px;
+  color: var(--color);
+  font-size: 45px;
+  line-height: 45px;
+}
+
+#inv2-body material .name {
+  padding-top: 20px;
+  font-family: space grotesk;
+  font-size: 11px;
+  line-height: 12px;
+  font-weight: 600;
+  letter-spacing: 0px;
+}
+
+#inv2-body material .grade {
+  position: absolute;
+  z-index: -1;
+  font-family: poppins;
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 60px;
+  bottom: -10px;
+  right: -10px;
+/*   transform: rotate(-5deg); */
+  opacity: .2;
+  color: var(--color);
+}
+
+#inv2-body material .quantity {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-family: space grotesk;
+  font-size: 10px;
+  font-weight: 600;
+  background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), var(--color);
+  color: rgba(255,255,255,.8);
+  padding: 1px 6px;
+  border-radius: 0 0 0 4px;
+}
+#inv2-body material .quantity::before { content: 'x'; }
+
+#inv2-header::before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  opacity: .1;
+  content: url("data:image/svg+xml,%3Csvg id='Capa_1' enable-background='new 0 0 512 512' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23FFF' d='m475.664 437.051c1.655-6.981-.234-14.639-5.669-20.074l-58.428-58.43 40.983-40.984c12.324-12.324 12.819-32.956-.039-45.346-12.274-11.829-32.069-11.643-44.126.414-8.25 8.25-11.257 20.317-7.848 31.491.205.672.197 1.617-.442 2.256l-12.308 12.309-55.638-59.877 166.579-154.785c2.081-1.882 3.398-4.448 3.713-7.238l9.485-83.994c.395-3.498-.807-6.932-3.296-9.422-2.489-2.489-5.919-3.691-9.422-3.296l-83.991 9.486c-2.791.315-5.357 1.633-7.24 3.714l-21.15 22.762c-2.82 3.034-2.646 7.78.389 10.599 3.034 2.82 7.78 2.646 10.599-.389l20.375-21.927 66.381-7.497-331.108 331.117-18.641-18.642c13.35-14.366 228.664-246.103 241.236-259.634 2.82-3.034 2.646-7.78-.389-10.599-3.034-2.82-7.78-2.645-10.599.389l-109.074 117.392-151.971-163.563c-1.877-2.088-4.445-3.409-7.246-3.725l-83.985-9.48c-3.317-.375-6.58.684-9.033 2.92-.136.118-.268.24-.397.369-.13.13-.254.263-.372.4-2.234 2.453-3.294 5.712-2.917 9.025l9.48 83.991c.316 2.803 1.637 5.371 3.725 7.248l166.566 154.773-55.637 59.88-12.306-12.306c-.639-.639-.647-1.585-.442-2.257 3.41-11.174.403-23.24-7.848-31.49-12.056-12.058-31.852-12.242-44.126-.414-12.863 12.396-12.357 33.029-.039 45.346l40.983 40.984-3.899 3.899c-2.929 2.929-2.929 7.678 0 10.607s7.678 2.929 10.606 0l3.899-3.899 31.82 31.821-58.428 58.43c-2.489 2.489-6.519 2.49-9.009 0l-11.386-11.387c-.006-.007-.013-.013-.019-.02-.006-.006-.013-.013-.019-.019l-11.386-11.387c-2.484-2.484-2.484-6.525 0-9.009l31.909-31.911c2.929-2.929 2.929-7.678 0-10.607s-7.678-2.929-10.606 0l-31.909 31.911c-5.435 5.435-7.324 13.093-5.669 20.074-9.211.284-18.337 3.932-25.352 10.948-14.621 14.622-14.621 38.413 0 53.034 7.308 7.312 16.912 10.968 26.515 10.968s19.206-3.656 26.517-10.967c7.015-7.015 10.664-16.141 10.947-25.352 7.042 1.669 14.681-.277 20.073-5.669l58.428-58.43 40.983 40.984c12.228 12.229 32.866 12.912 45.345-.039 11.829-12.275 11.643-32.07-.414-44.127-8.249-8.25-20.315-11.258-31.49-7.848-.672.205-1.617.196-2.256-.442l-12.306-12.307 62.677-58.239 30.221 28.083c1.444 1.342 3.276 2.006 5.104 2.006 2.012 0 4.019-.805 5.496-2.395 2.82-3.035 2.646-7.781-.389-10.6l-29.413-27.332 21.608-20.078 59.298 59.3-18.639 18.64-9.425-8.758c-3.034-2.82-7.78-2.644-10.6.389-2.82 3.035-2.646 7.781.389 10.6l9.022 8.384-12.308 12.308c-.64.639-1.585.646-2.257.442-11.173-3.41-23.239-.402-31.489 7.848-12.057 12.058-12.243 31.853-.414 44.127 12.487 12.959 33.124 12.26 45.345.039l40.983-40.984 58.428 58.43c4.167 4.167 9.638 6.249 15.11 6.249 1.666 0 3.333-.194 4.963-.58.284 9.212 3.932 18.338 10.948 25.353 7.311 7.311 16.914 10.966 26.517 10.966s19.206-3.655 26.517-10.966c14.621-14.622 14.621-38.413 0-53.035-7.016-7.016-16.142-10.665-25.353-10.949zm-229.905-249.187-22.78 24.517-195.55-195.555 66.373 7.492zm-221.445-94.056-7.492-66.375 195.94 195.945-22.707 24.438zm29.094 396.619c-8.773 8.773-23.047 8.773-31.82 0-8.772-8.773-8.772-23.048 0-31.821 8.732-8.731 22.975-8.802 31.782-.038l.076.077c8.734 8.776 8.722 23.021-.038 31.782zm441.77-462.998-7.496 66.382c-17.227 16.008-286.809 266.502-304.97 283.377l-18.642-18.642zm-282.912 387.47c5.857-1.788 12.183-.214 16.505 4.108 6.315 6.316 6.414 16.684.22 23.111-6.413 6.655-17.382 6.397-23.938-.159-14.555-14.555-120.628-120.632-134.999-135.003-6.463-6.464-6.893-17.449-.159-23.938 6.418-6.186 16.787-6.104 23.11.22 4.321 4.321 5.895 10.645 4.107 16.504-1.883 6.171-.281 12.778 4.182 17.242l93.73 93.732c4.464 4.463 11.072 6.068 17.242 4.183zm87.359-125.869 21.535-20.01 56.013 60.281-18.639 18.64zm7.319 152.929c-6.464 6.463-17.447 6.894-23.938.159-6.194-6.427-6.096-16.796.22-23.111 4.31-4.311 10.627-5.899 16.504-4.108 6.172 1.884 12.778.281 17.241-4.182 103.928-103.93 64.701-64.703 93.729-93.732 4.464-4.463 6.067-11.07 4.183-17.242-1.788-5.86-.214-12.184 4.107-16.505 6.316-6.316 16.684-6.414 23.11-.22 6.737 6.493 6.301 17.477-.159 23.938zm120.624 17.446-58.428-58.43 31.82-31.821 58.428 58.43c2.483 2.484 2.483 6.525 0 9.009-8.324 8.324-14.717 14.717-22.811 22.811-2.484 2.485-6.525 2.484-9.009.001zm62.841 31.022c-8.773 8.772-23.048 8.773-31.82 0-8.76-8.761-8.773-23.006-.038-31.783l.076-.077c8.736-8.694 22.983-8.761 31.782.038 8.773 8.774 8.773 23.049 0 31.822z'/%3E%3C/svg%3E");
+}
+
+@-webkit-keyframes wiggle {
+  0% {-webkit-transform: rotate(10deg);}
+  25% {-webkit-transform: rotate(-10deg);}
+  50% {-webkit-transform: rotate(20deg);}
+  75% {-webkit-transform: rotate(-5deg);}
+  100% {-webkit-transform: rotate(0deg);}
+}
+
+@-ms-keyframes wiggle {
+  0% {-ms-transform: rotate(1deg);}
+  25% {-ms-transform: rotate(-1deg);}
+  50% {-ms-transform: rotate(1.5deg);}
+  75% {-ms-transform: rotate(-5deg);}
+  100% {-ms-transform: rotate(0deg);}
+}
+
+@keyframes wiggle {
+  0% {transform: rotate(10deg);}
+  25% {transform: rotate(-10deg);}
+  50% {transform: rotate(20deg);}
+  75% {transform: rotate(-5deg);}
+  100% {transform: rotate(0deg);}
+}
+
+    </style>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+<link href="//dl.dropbox.com/s/sifqm3rvszngm7y/tpk.css" rel="stylesheet">
+<link href="https://files.jcink.net/uploads/tpk/fonticons/saturnicons.css" rel="stylesheet">
+<script type='text/javascript' src='https://files.jcink.net/html/jquery-1.7.2.min.js'></script>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+<link rel="stylesheet" href="https://files.jcink.net/uploads/tpk/fonticons/game_icons.css">
+
+<div id="inv2-wrap">
+  <div id="inv2-header">
+    <div class="name">CALLAWAY WHARTON</div>
+  </div>
+  
+  <div id="inv2-nav">
+    <a href="#weapons"><i class="fa-thin fa-swords"></i>WEAPONS</a>
+    <a href="#armor"><i class="fa-thin fa-shield"></i>ARMOR</a>
+    <a href="#trinkets"><i class="fa-thin fa-ring"></i>TRINKETS</a>
+    <a href="#consumables"><i class="fa-thin fa-flask-round-potion"></i></i>CONSUMABLES</a>
+    <a href="#materials"><i class="fa-thin fa-leaf-oak"></i>MATERIALS</a>
+  </div>
+
+  <div id="inv2-body">
+    
+    <section id="weapons">
+      <h1>Weapons</h1>
+      
+      <div class="treasure">
+        <item>
+          <h2>sunder
+          <span class="grade">C</span></h2>
+          <div class="icon">
+            <span class="game-icon game-icon-croc-sword"></span>
+          </div>
+          <div class="description">A sizable claymore meant to match the height of its wielder, this blade has escorted Belial since his first encounter with the divine. It has long since lost its divine glow, however it continues to loyally serve the oathbreaker.</div>
+          <div class="notes">
+            <note>slashing</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>galeforce
+          <span class="grade">C</span></h2>
+          <div class="icon">
+            <span class="game-icon game-icon-croc-sword"></span>
+          </div>
+          <div class="description">This weapon has been enchanted with the soul of an air elemental. The blade looks like a gust of wind, and when in use, it howls like a gale, as if enjoying the bite of flesh. When you crit on an attack, anybody (friend or foe) adjacent to you must roll a DC 13 Wisdom save or be frightened by the air elemental trapped inside of this weapon. After each crit, the wind that's bound to the blade fades a little as if the magic is sapped, and after six crits, it turns into a normal rank C melee weapon. </div>
+          <div class="notes">
+            <note>slashing</note>
+            <note>frightened</note>
+            <note>6/6</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>vilebite 
+           <span class="grade">C</span></h2>
+          <div class="icon">
+            <span class="game-icon game-icon-dripping-blade"></span>
+          </div>
+          
+          <div class="description">this weapon is a noxious green splattered with blood. on your first three attacks per combat encounter, your target must succeed on a <code>DC13 CON</code> saving throw or be POISONED for three rounds. while equipped, PERCEPTION and SURVIVAL checks to find or track you relying on smell are done at advantage. </div>
+          <div class="notes">
+            <note>slashing</note>
+            <note>poisoned</note>
+          </div>
+        </item>
+        
+        
+        
+      </div>
+    </section>
+    
+    <section id="armor">
+      <h1>armor</h1>
+      
+      <div class="treasure">
+        
+        <item>
+          <h2>traveling clothes
+          <span class="grade">E</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-elbow-pad"></i>
+          </div>
+          <div class="description"> A simple set of leather-padded traveling clothes. </div>
+          <div class="notes">
+            <note>light (2 ac)</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>boiled leather chestplate
+          <span class="grade">C</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-chest-armor"></i>
+          </div>
+          <div class="description">Lucina's latest offcuts of leather stitched into a makeshift chestplate she has for sale in her store. </div>
+          <div class="notes">
+            <note>medium (4 ac)</note>
+            <note>+1 ac</note>
+            <note>+1 dmg mit</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>ring mail of three wishes
+          <span class="grade">C</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-spikes-full"></i>
+          </div>
+          <div class="description">when you are hit by a melee or ranged attack while wearing this armor, you can use your bonus action to wish that you hadn't been hit. the wounds and conditions suffered from the attack are immediately reverted. the attack deals no damage, but the AC provided by the armor decreases by 1. after the third wish, the armor's rings vanish and it becomes rank e heavy armor. </div>
+          <div class="notes">
+            <note>7 ac</note>
+            <note>heavy (6 ac)</note>
+            <note>3/3</note>
+          </div>
+        </item>
+        
+      </div>
+    </section>
+    
+    <section id="trinkets">
+      <h1>Trinkets</h1>
+      
+      <div class="treasure">
+        
+        <item>
+          <h2>emergency bandaid
+          <span class="grade">E</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-arm-bandage"></i>
+          </div>
+          <div class="description">When this ITEM is worn, it will automatically remove the bleeding condition from the wearer at the beginning of their turn. This has two uses before it breaks. </div>
+          <div class="notes">
+            <note>bleed dispel</note>
+            <note>2/2</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>a gift from a friend
+          <span class="grade">E</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-shut-rose"></i>
+          </div>
+          <div class="description">A diamond-shaped locket with an unassuming appearance for its exterior; faded, small red stones lining a black pattern on the surface, coated in silver to match the chain it dangles from. Inside, safely secured with an enchantment, are the petals of a White Lily, magic gently embedded into them to protect its wearer from whatever harm would befall them. When you use a defensive technique to mitigate damage, roll a secondary defensive technique and add that dice (min 1d10) to the total mitigation. </div>
+          <div class="notes">
+            <note>damage mitigation</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>glass cannon
+          <span class="grade">D</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-groundbreaker"></i>
+          </div>
+          <div class="description">This JEWELRY ACCESSORY allows you to add +2 damage when trying to do melee attacks. Fragile. Breaks after use in 1 thread. </div>
+          <div class="notes">
+            <note>damage bonus</note>
+            <note>broken</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>dead man's coin
+          <span class="grade">D</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-metal-disc"></i>
+          </div>
+          <div class="description">A rusted coin on a piece of twine that can be worn like a necklace. Sacrifice 2d10 HP to summon a Rank D skeleton pirate to fight for you. This skeleton operates the same way that a companion does. You must use your bonus action to instruct them to act. This trinket can be used once per encounter. </div>
+          <div class="notes">
+            <note>rank d summon</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>spiteful band
+          <span class="grade">B</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-skull-signet"></i>
+          </div>
+          <div class="description">This accessory can be activated to put the fear of the gods you definitely don't believe in into your enemies. Once per encounter, you may use your bonus action to make a target within range make a DEX saving throw of 14. If they fail; their armor is Sundered, and they are Fettered for one round. </div>
+          <div class="notes">
+            <note>dc 14 dex</note>
+            <note>sundered</note>
+            <note>fettered</not>
+          </div>
+        </item>
+        
+        <item>
+          <h2>golden rabbit's foot
+          <span class="grade">B</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-ring"></i>
+          </div>
+          <div class="description">The luckiest rabbit's foot ever. Two times per thread, when rolling a STR skill check you may treat a d20 roll of a 9 or lower as a 10. In addition, your critical threat range is increased by 1. </div>
+          <div class="notes">
+            <note>crit range +1</note>
+            <note>str</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>void ring
+          <span class="grade">B</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-power-ring"></i>
+          </div>
+          <div class="description">While wearing this jewelry access and rolling a strength check, treat a d20 roll of 9 or lower as a 10. Additionally, this accessory increases the DC of your Embargoed and Paranoid conditions by 4. </div>
+          <div class="notes">
+            <note>embaroed/paranoid dc +4</note>
+            <note>str</note>
+          </div>
+        </item>
+        
+        <item>
+          <h2>hat of unnecessarily sultry costumes
+          <span class="grade">A</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-pointy-hat"></i>
+          </div>
+          <div class="description">When a creatures places this hat on their head, they automatically become disguised, giving them the appearance of a highly attractive member of a randomly determined race wearing an overly and somewhat arbitrarily skimpy version of a costume randomly rolled using this table. The hat cannot be removed unless a greater dispel is cast. There is a 50% chance the illusion will be of the opposite sex. A creature can use their main action to inspect your appearance and must succeed a DC 15 Intelligence (Investigation) check to see through the spell. Lasts 1d4 hours before the magic fades. Has 5 uses before the magic fades. </div>
+        </item>
+        
+        <item>
+          <h2>gauntlets of ogre power
+          <span class="grade">SSS</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-armor-punch"></i>
+          </div>
+          <div class="description">While wearing these gauntlets, you have advantage on strength checks to push, pull, drag, or lift objects that you normally would be unable to move. While in combat, you have advantage on grapple checks. </div>
+          <div class="notes">
+            <note>str adv</note>
+          </div>
+        </item>
+        
+      </div>
+    </section>
+    
+    <section id="consumables">
+      <h1>Consumables</h1>
+      
+      <div class="treasure">
+        <item>
+          <h2>chilled pomegranate
+          <span class="grade">C</span></h2>
+          <div class="icon">
+            <i class="game-icon game-icon-apple-seeds"></i>
+          </div>
+          <div class="description">A token of your time here in this dream realm. This piece of a pomegranate can do one of two things. After consuming it, you can either gain advantage on CHA checks and saves when interacting with fey creatures or encase yourself in an icy aura that deals 1d10 permafrost damage to melee attackers. The advantage on CHA checks would last throughout the thread and the icy aura would last for 3 rounds. </div>
+          <div class="notes">
+            <note>adv on cha</note>
+            <note>1d10 permafrost dmg aura</note>
+            <note>1/1</note>
+          </div>
+        </item>
+      </div>
+    </section>
+    
+    <section id="materials">
+      <h1>Crafting Materials</h1>
+      
+      <div class="crafting-mats">
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+        
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+        
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+        
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+        
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+        
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+        
+        <material>
+          <div class="icon"><i class="game-icon game-icon-minerals"></i></div>
+          <div class="grade">A</div>
+          <div class="name">ruby ore</div>
+          <div class="quantity">2</div>
+        </material>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+    $('.treasure').isotope({
+  itemSelector: 'item',
+  masonry: {
+    columnWidth: 295,
+    gutter: 20,
+    horizontalOrder: true,
+  }
+});
+</script>
+</body>
+</html>
